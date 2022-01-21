@@ -48,16 +48,9 @@ app.get('/healthz', function(req, res) {
 });
 
 let credentials;
+let binding_1;
 
-// Retrieve the Kubernetes environment variables from BINDING in the clouddb-deployment.yaml file
-// Check to make sure that the BINDING environment variable is present
-// If it's not present, then it will throw an error
-if (process.env.BINDING) {
-    console.log(process.env.BINDING)
-    credentials = JSON.parse(process.env.BINDING);
-}
-
-credentials = "{
+binding_1 = "{
   "connection": {
     "cli": {
       "arguments": [
@@ -115,6 +108,17 @@ credentials = "{
     "root": "https://api.eu-de.databases.cloud.ibm.com/v5/ibm"
   }
 }"
+
+// Retrieve the Kubernetes environment variables from BINDING in the clouddb-deployment.yaml file
+// Check to make sure that the BINDING environment variable is present
+// If it's not present, then it will throw an error
+//if (process.env.BINDING) {
+if (binding_1) {
+    console.log(process.env.BINDING)
+    credentials = JSON.parse(process.env.BINDING);
+}
+
+
 
 
 assert(!util.isUndefined(credentials), "Must be bound to IBM Kubernetes Cluster");
